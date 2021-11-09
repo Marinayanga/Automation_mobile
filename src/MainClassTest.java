@@ -21,6 +21,7 @@ public class MainClassTest extends MainClass{
     @Test
     public void testGetClassString()
     {
-        Assert.assertTrue( "В строке нет ни Hello, ни hello",this.getClassString().toLowerCase().contains("hello"));
+        Assert.assertTrue( "В строке нет ни Hello, ни hello",
+                this.getClassString().contains("hello") || this.getClassString().contains("Hello"));
     }
 }

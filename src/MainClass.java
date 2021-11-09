@@ -1,7 +1,7 @@
 public class MainClass {
     private int class_number = 20;
 
-    private String class_string = "Hello, world";
+    private String class_string = "hello, world";
 
     public int getLocalNumber (){
 
