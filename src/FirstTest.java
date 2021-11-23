@@ -5,12 +5,14 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.net.URL;
+import java.util.List;
 
 public class FirstTest {
 
@@ -44,7 +46,7 @@ public class FirstTest {
                 "Java",
                 "Cannot find the element",
                 5);
-         
+
         waitForElementPresent(
                 By.xpath("//*[@resource-id='org.wikipedia:id/page_list_item_container']//*[@text='Object-oriented programming language']"),
                 "Cannot find 'Object-oriented programming language' topic searching by Java", 15);
@@ -110,6 +112,29 @@ public class FirstTest {
 
     }
 
+    @Test
+    public void TestSearchFewArticles() {
+        waitForElementAndClick(By.xpath("//*[contains(@text,'Search Wikipedia')]"),
+                "Cannot find the Wiki search page",
+                5);
+        waitForElementAndSendKeys(By.xpath("//*[contains(@text,'Search…')]"),
+                "table",
+                "Cannot find the element",
+                5);
+        countOfArticles(
+                By.xpath(("//*[org.wikipedia:id/search_results_list]/*[org.wikipedia:id/page_list_item_container]")),
+                "You have only 1 or 0 result",
+                5);
+        waitForElementAndClick(
+                By.id("org.wikipedia:id/search_close_btn"),
+                "Cannot find the X button",
+                5);
+        waitForElementNotPresent(
+                By.id("//*[@resource-id='org.wikipedia:id/page_list_item_container']"),
+                "list is not empty",
+                5);
+    }
+
 
     private WebElement waitForElementPresent(By by, String error_message, long timeoutInSeconds) {
         WebDriverWait wait = new WebDriverWait(driver, timeoutInSeconds);
@@ -159,4 +184,18 @@ public class FirstTest {
         return true;
 
     }
+
+    //org.wikipedia:id/page_list_item_container
+    private boolean countOfArticles(By by, String error_message, long timeoutInSeconds) {
+        //WebElement element = waitForElementPresent(by, error_message, timeoutInSeconds);
+        List elements = driver.findElements(by);
+        boolean check = false;
+        if (elements.size() > 1) {
+            check = true;
+        }
+        return check;
+
+
+    }
+
 }
