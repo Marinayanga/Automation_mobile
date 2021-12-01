@@ -9,9 +9,11 @@ import org.openqa.selenium.*;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-
+import java.time.Duration;
 import java.net.URL;
 import java.util.List;
+import io.appium.java_client.touch.WaitOptions;
+import io.appium.java_client.touch.offset.PointOption;
 
 public class FirstTest {
 
@@ -309,7 +311,7 @@ public class FirstTest {
                 "Cannot find the Java oop result ",
                 5);
 
-        driver.runAppInBackground(5);
+        driver.runAppInBackground(Duration.ofSeconds(5));
 
         waitForElementPresent(By.xpath("//*[@resource-id='org.wikipedia:id/page_list_item_container']//*[@text='Object-oriented programming language']"),
                 "Cannot find the Java oop result after returning from background",
@@ -510,7 +512,9 @@ public class FirstTest {
         int start_y = (int) (size.height * 0.8);
         int end_y = (int) (size.height * 0.2);
 
-        action.press(x, start_y).waitAction(timeOfSwipe).moveTo(x, end_y).release().perform();
+        action.press(PointOption.point(x, start_y))
+                .waitAction(WaitOptions.waitOptions(Duration.ofMillis(timeOfSwipe)))
+                .moveTo(PointOption.point(x, end_y)).release().perform();
 
     }
 
@@ -522,7 +526,7 @@ public class FirstTest {
         int already_swiped = 0;
         while (driver.findElements(by).size() == 0) {
             if (already_swiped > max_swipes) {
-                waitForElementPresent(by, "Cannot find the element by swipingUp.\n" + error_message, 0);
+                waitForElementPresent(by, "Cannot find the element by swipingUp." + error_message, 0);
                 return;
             }
             swipeUpQuick();
@@ -538,7 +542,9 @@ public class FirstTest {
         int lower_y = upper_y + element.getSize().getHeight();
         int middle_y = (upper_y + lower_y) / 2;
         TouchAction action = new TouchAction(driver);
-        action.press(right_x, middle_y).waitAction(300).moveTo(left_x, middle_y).release().perform();
+        action.press(PointOption.point(right_x, middle_y))
+                .waitAction(WaitOptions.waitOptions(Duration.ofMillis(3000)))
+                .moveTo(PointOption.point(left_x, middle_y)).release().perform();
 
 
     }
