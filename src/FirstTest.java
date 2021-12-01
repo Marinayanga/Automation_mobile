@@ -421,8 +421,25 @@ public class FirstTest {
         );
         Assert.assertEquals("Wrong article was deleted","Linkin Park", second_article_title);
 
+    }
 
-
+    @Test
+    public void testForTitle(){
+        waitForElementAndClick(By.xpath("//*[contains(@text,'Search Wikipedia')]"),
+                "Cannot find the Wiki search page",
+                5);
+        String search_line = "Java";
+        waitForElementAndSendKeys(By.xpath("//*[contains(@text,'Search…')]"),
+                search_line,
+                "Cannot find 'Object-oriented programming language'" + search_line,
+                15);
+        waitForElementAndClick(By.xpath("//*[@resource-id='org.wikipedia:id/page_list_item_container']//*[@text='Object-oriented programming language']"),
+                "Cannot find the Java oop result",
+                5);
+        assertElementPresent(
+                By.id("org.wikipedia:id/view_page_title_text"),
+                "text",
+                "The article has no title",15);
 
     }
 
@@ -544,6 +561,11 @@ public class FirstTest {
         WebElement element = waitForElementPresent(by, error_message, timeoutInSeconds);
         return element.getAttribute(attribute);
     }
+
+    private void assertElementPresent(By by, String attribute, String error_message, long timeoutInSeconds){
+        WebElement element = driver.findElement(by);
+        Assert.assertTrue (element.getAttribute(attribute) !=null);
+    };
 
 
 }
