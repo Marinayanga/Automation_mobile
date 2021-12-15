@@ -22,7 +22,7 @@ public class CoreTestCase extends TestCase {
 
         capabilities.setCapability("platformName", "Android");
         capabilities.setCapability("deviceName", "AndroidTestDevice");
-        capabilities.setCapability("platformVersion", "10");
+        capabilities.setCapability("platformVersion", "12");
         capabilities.setCapability("AutomationName", "Appium");
         capabilities.setCapability("appPackage", "org.wikipedia");
         capabilities.setCapability("appActivity", ".main.MainActivity");
