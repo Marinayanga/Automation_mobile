@@ -7,22 +7,23 @@ import org.openqa.selenium.WebElement;
 
 public class ArticlePageObject extends MainPageObject {
     private static final String
-            TITLE = "org.wikipedia:id/view_page_title_text",
-            FOOTER_ELEMENT = "//*[@text='View page in browser']",
-            OPTIONS_BUTTON = "//android.widget.ImageView[@content-desc='More options']",
-            OPTION_ADD_TO_MY_LIST_BUTTON = "//*[@text='Add to reading list']",
-            ADD_TO_MY_LIST_OVERLAY = "org.wikipedia:id/onboarding_button",
-            MY_LIST_NAME_INPUT = "org.wikipedia:id/text_input",
-            MY_USED_LIST_NAME = "//*[@resource-id='org.wikipedia:id/item_container']//*[@text= '{USED_LIST_NAME}']",
-            MY_LIST_OK_BUTTON = "//*[@text='OK']",
-            CLOSE_ARTICLE_BUTTON = "//android.widget.ImageButton[@content-desc='Navigate up']";
+            TITLE = "id:org.wikipedia:id/view_page_title_text",
+            FOOTER_ELEMENT = "xpath://*[@text='View page in browser']",
+            OPTIONS_BUTTON = "xpath://android.widget.ImageView[@content-desc='More options']",
+            OPTION_ADD_TO_MY_LIST_BUTTON = "xpath://*[@text='Add to reading list']",
+            ADD_TO_MY_LIST_OVERLAY = "id:org.wikipedia:id/onboarding_button",
+            MY_LIST_NAME_INPUT = "id:org.wikipedia:id/text_input",
+            MY_USED_LIST_NAME = "xpath://*[@resource-id='org.wikipedia:id/item_container']//*[@text= '{USED_LIST_NAME}']",
+            MY_LIST_OK_BUTTON = "xpath://*[@text='OK']",
+            CLOSE_ARTICLE_BUTTON = "xpath://android.widget.ImageButton[@content-desc='Navigate up']",
+            CHANGE_LANGUAGE= "xpath://*[@text='Change language']";
 
     public ArticlePageObject(AppiumDriver driver) {
         super(driver);
     }
 
     public WebElement waitForTitleElement() {
-        return this.waitForElementPresent(By.id(TITLE), "Cannot find article title on page", 15);
+        return this.waitForElementPresent(TITLE, "Cannot find article title on page", 15);
     }
 
     public String getArticleTitle() {
@@ -31,60 +32,56 @@ public class ArticlePageObject extends MainPageObject {
     }
 
     public void swipeToFooter() {
-        this.swipeUpToFindElement(By.xpath(FOOTER_ELEMENT),
+        this.swipeUpToFindElement(FOOTER_ELEMENT,
                 "can not find the and of article",
                 20);
     }
 
     public void addArticleToMyList(String name_of_folder) {
-        this.waitForElementAndClick(By.xpath(OPTIONS_BUTTON),
+        this.waitForElementAndClick(OPTIONS_BUTTON,
                 "Cannot find button to open article options",
                 5);
-        this.waitForElementPresent(By.xpath("//*[@text='Change language']"),
+        this.waitForElementPresent(CHANGE_LANGUAGE,
                 "Cannot find Change language",
                 5);
 
-        this.waitForElementAndClick(By.xpath(OPTION_ADD_TO_MY_LIST_BUTTON),
+        this.waitForElementAndClick(OPTION_ADD_TO_MY_LIST_BUTTON,
                 "Cannot find option to add article options",
                 5);
-        this.waitForElementAndClick(By.id(ADD_TO_MY_LIST_OVERLAY),
+        this.waitForElementAndClick(ADD_TO_MY_LIST_OVERLAY,
                 "Cannot find button Got It",
                 5);
-        this.waitForElementAndClear(By.id(MY_LIST_NAME_INPUT),
+        this.waitForElementAndClear(MY_LIST_NAME_INPUT,
                 "Cannot find input to set list name",
                 5);
-        this.waitForElementAndSendKeys(By.id(MY_LIST_NAME_INPUT),
+        this.waitForElementAndSendKeys(MY_LIST_NAME_INPUT,
                 name_of_folder,
                 "Cannot put text into list name input", 5);
-        this.waitForElementAndClick(By.xpath(MY_LIST_OK_BUTTON),
+        this.waitForElementAndClick(MY_LIST_OK_BUTTON,
                 "Cannot find button OK",
                 5);
 
     }
 
     public void addArticleToUsedList() {
-        this.waitForElementAndClick(By.xpath(OPTIONS_BUTTON),
+        this.waitForElementAndClick(OPTIONS_BUTTON,
                 "Cannot find button to open article options",
                 5);
-        this.waitForElementPresent(By.xpath("//*[@text='Change language']"),
+        this.waitForElementPresent(CHANGE_LANGUAGE,
                 "Cannot find Change language",
                 5);
-        this.waitForElementAndClick(By.xpath(OPTION_ADD_TO_MY_LIST_BUTTON),
+        this.waitForElementAndClick(OPTION_ADD_TO_MY_LIST_BUTTON,
                 "Cannot find option to add article options",
                 5);
     }
 
     public void closeArticle() {
-        this.waitForElementAndClick(By.xpath(CLOSE_ARTICLE_BUTTON),
+        this.waitForElementAndClick(CLOSE_ARTICLE_BUTTON,
                 "Cannot close article by X",
                 5);
     }
-    public String asserElementPresent() {
-        //WebElement element = driver.findElement(By.id(TITLE));
-        //Assert.assertTrue((element.getAttribute(attribute_title) != null));
-
-
-        WebElement title_element = driver.findElement(By.id(TITLE));
+    public String assertElementPresent() {
+        WebElement title_element = driver.findElement(By.id("org.wikipedia:id/view_page_title_text"));
         return title_element.getAttribute("text");
     }
 }

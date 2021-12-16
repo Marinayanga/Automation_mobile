@@ -20,7 +20,7 @@ public class IOSTestCase extends TestCase {
         DesiredCapabilities capabilities = new DesiredCapabilities();
 
         capabilities.setCapability("platformName", "IOS");
-        capabilities.setCapability("deviceName", "Iphone 11");
+        capabilities.setCapability("deviceName", "iPhone 11");
         capabilities.setCapability("platformVersion", "14.0");
         capabilities.setCapability("app", "/Users/skyeng/Desktop/JavaAppiumAutomation/Automation_mobile/apks/Wikipedia.app");
 

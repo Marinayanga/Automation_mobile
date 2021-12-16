@@ -6,12 +6,12 @@ import org.openqa.selenium.By;
 public class WelcomePageObject extends MainPageObject {
 
     private static final String
-            STEP_LEARN_MORE_LINK = "//*[@name='Learn more about Wikipedia']",
-            STEP_NEW_WAYS_TO_EXPLORE = "New ways to explore",
-            STEP_FOR_ADD_OR_EDIT_PREFERRED_LANGUAGE= "//*[@name='Add or edit preferred languages']",
-            STEP_FOR_LEARNED_MORE_ABOUT_DATA_COLLECTED = "//*[@name='Learn more about data collected']",
-            NEXT_LINK="//*[@name='Next']",
-            GET_STARTED_BUTTON = "//*[@name='Get started']";
+            STEP_LEARN_MORE_LINK = "xpath://*[@name='Learn more about Wikipedia']",
+            STEP_NEW_WAYS_TO_EXPLORE = "id:New ways to explore",
+            STEP_FOR_ADD_OR_EDIT_PREFERRED_LANGUAGE= "xpath://*[@name='Add or edit preferred languages']",
+            STEP_FOR_LEARNED_MORE_ABOUT_DATA_COLLECTED = "xpath://*[@name='Learn more about data collected']",
+            NEXT_LINK="xpath://*[@name='Next']",
+            GET_STARTED_BUTTON = "xpath://*[@name='Get started']";
 
 
 
@@ -20,27 +20,27 @@ public class WelcomePageObject extends MainPageObject {
     }
 
     public void waitForLearnMoreLink() {
-        this.waitForElementPresent(By.xpath(STEP_LEARN_MORE_LINK), "Cannot find 'Learn more about Wikipedia' link", 10);
+        this.waitForElementPresent(STEP_LEARN_MORE_LINK, "Cannot find 'Learn more about Wikipedia' link", 10);
     }
 
     public void waitForNewWaysToExplore() {
-        this.waitForElementPresent(By.id(STEP_NEW_WAYS_TO_EXPLORE), "Cannot find 'New ways to explore' button", 10);
+        this.waitForElementPresent(STEP_NEW_WAYS_TO_EXPLORE, "Cannot find 'New ways to explore' button", 10);
     }
 
     public void waitForAddOrEditPreferredLanguages() {
-        this.waitForElementPresent(By.xpath( STEP_FOR_ADD_OR_EDIT_PREFERRED_LANGUAGE), "Cannot find 'Add or edit preferred languages' button", 10);
+        this.waitForElementPresent(STEP_FOR_ADD_OR_EDIT_PREFERRED_LANGUAGE, "Cannot find 'Add or edit preferred languages' button", 10);
     }
 
     public void waitForLearnedMoreAboutDataCollected() {
-        this.waitForElementPresent(By.xpath( STEP_FOR_LEARNED_MORE_ABOUT_DATA_COLLECTED), "Cannot find 'Learn more about data collected' button", 10);
+        this.waitForElementPresent(STEP_FOR_LEARNED_MORE_ABOUT_DATA_COLLECTED, "Cannot find 'Learn more about data collected' button", 10);
     }
 
     public void clickNextButton() {
-        this.waitForElementAndClick(By.xpath(NEXT_LINK), "Cannot find 'Next' button", 10);
+        this.waitForElementAndClick(NEXT_LINK, "Cannot find 'Next' button", 10);
     }
 
     public void clickGetStartedButton() {
-        this.waitForElementAndClick(By.xpath(GET_STARTED_BUTTON), "Cannot find 'Get started' button", 10);
+        this.waitForElementAndClick(GET_STARTED_BUTTON, "Cannot find 'Get started' button", 10);
     }
 
 }

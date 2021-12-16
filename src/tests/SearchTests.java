@@ -89,7 +89,7 @@ public class SearchTests extends CoreTestCase {
         SearchPageObject.clickByArticleWithSubstring("Object-oriented programming language");
 
         ArticlePageObject ArticlePageObject = new ArticlePageObject(driver);
-        ArticlePageObject.asserElementPresent();
+        ArticlePageObject.assertElementPresent();
 
     }
 }
