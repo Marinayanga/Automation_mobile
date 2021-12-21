@@ -48,7 +48,7 @@ abstract public class ArticlePageObject extends MainPageObject {
         public void addArticleToMyList (String name_of_folder){
             this.waitForElementAndClick(OPTIONS_BUTTON,
                     "Cannot find button to open article options",
-                    5);
+                    10);
             this.waitForElementPresent(CHANGE_LANGUAGE,
                     "Cannot find Change language",
                     5);
@@ -74,13 +74,13 @@ abstract public class ArticlePageObject extends MainPageObject {
         public void addArticleToUsedList () {
             this.waitForElementAndClick(OPTIONS_BUTTON,
                     "Cannot find button to open article options",
-                    5);
+                    10);
             this.waitForElementPresent(CHANGE_LANGUAGE,
                     "Cannot find Change language",
                     5);
             this.waitForElementAndClick(OPTION_ADD_TO_MY_LIST_BUTTON,
                     "Cannot find option to add article options",
-                    5);
+                    10);
         }
 
         public void closeArticle () {
@@ -92,5 +92,9 @@ abstract public class ArticlePageObject extends MainPageObject {
         WebElement title_element = driver.findElement(TITLE);
         return title_element.getAttribute("text");
     }*/
+        }
+
+        public void addArticleToMySaved(){
+           this.waitForElementAndClick(OPTION_ADD_TO_MY_LIST_BUTTON, "Cannot find option to add article to reading list", 10);
         }
     }
