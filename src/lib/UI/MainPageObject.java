@@ -117,59 +117,78 @@ public class MainPageObject {
         }
     }
 
-    public void swipeElementToLeft(String locator, String error_message, int max_swipes) {
-        WebElement element = waitForElementPresent(locator, error_message, 10);
-        int left_x = element.getLocation().getX();
-        int right_x = left_x + element.getSize().getWidth();
-        int upper_y = element.getLocation().getY();
-        int lower_y = upper_y + element.getSize().getHeight();
-        int middle_y = (upper_y + lower_y) / 2;
-        TouchAction action = new TouchAction(driver);
-        action.press(PointOption.point(right_x, middle_y))
-                .waitAction(WaitOptions.waitOptions(Duration.ofMillis(3000)))
-                .moveTo(PointOption.point(left_x, middle_y)).release().perform();
-
-
-    }
-
-    public int getAmountofElements(String locator) {
-        By by = this.getLocatorByString(locator);
-        List elements = driver.findElements(by);
-        return elements.size();
-
-    }
-
-    public void AssertElementNotPresent(String locator, String error_message) {
-        int amount_of_elements = getAmountofElements(locator);
-        if (amount_of_elements > 0) {
-            String default_message = "An element '" + locator.toString() + "' supposed to be not present";
-            throw new AssertionError(default_message + " " + error_message);
+    public void swipeUpTillElementAppear(String locator, String error_message, int max_swipes) {
+        int already_swiped = 0;
+        while (!this.isElementLocatedOnTheScreen(locator)) {
+            if (already_swiped > max_swipes) {
+                Assert.assertTrue(error_message, this.isElementLocatedOnTheScreen(locator));
+            }
+            swipeUpQuick();
+            ++already_swiped;
         }
     }
 
-    public String waitForElementandGetAttribute(String locator, String attribute, String error_message, long timeoutInSeconds) {
-        WebElement element = waitForElementPresent(locator, error_message, timeoutInSeconds);
-        return element.getAttribute(attribute);
-    }
-
-    public void assertElementPresent(String locator, String attribute, String error_message, long timeoutInSeconds) {
-        By by = this.getLocatorByString(locator);
-        WebElement element = driver.findElement(by);
-        Assert.assertTrue(element.getAttribute(attribute) != null);
-    }
-
-    private By getLocatorByString(String locator_with_type) {
-        String[] exploded_locator = locator_with_type.split(Pattern.quote(":"), 2);
-        String by_type = exploded_locator[0];
-        String locator = exploded_locator[1];
-
-        if (by_type.equals("xpath")) {
-            return By.xpath(locator);
-        } else if (by_type.equals("id")) {
-            return By.id(locator);
-        } else{
-           throw new IllegalArgumentException("Cannot get type of locator. Locator:" + locator_with_type);
+        public boolean isElementLocatedOnTheScreen(String locator){
+            int element_location_by_y = this.waitForElementPresent(locator, "Cannot find element by locator", 5).getLocation().getY();
+            int screen_size_by_y = driver.manage().window().getSize().getHeight();
+            return element_location_by_y < screen_size_by_y;
         }
-    }
 
-}
+
+        public void swipeElementToLeft (String locator, String error_message,int max_swipes){
+            WebElement element = waitForElementPresent(locator, error_message, 10);
+            int left_x = element.getLocation().getX();
+            int right_x = left_x + element.getSize().getWidth();
+            int upper_y = element.getLocation().getY();
+            int lower_y = upper_y + element.getSize().getHeight();
+            int middle_y = (upper_y + lower_y) / 2;
+            TouchAction action = new TouchAction(driver);
+            action.press(PointOption.point(right_x, middle_y))
+                    .waitAction(WaitOptions.waitOptions(Duration.ofMillis(3000)))
+                    .moveTo(PointOption.point(left_x, middle_y)).release().perform();
+
+
+        }
+
+        public int getAmountofElements (String locator){
+            By by = this.getLocatorByString(locator);
+            List elements = driver.findElements(by);
+            return elements.size();
+
+        }
+
+        public void AssertElementNotPresent (String locator, String error_message){
+            int amount_of_elements = getAmountofElements(locator);
+            if (amount_of_elements > 0) {
+                String default_message = "An element '" + locator.toString() + "' supposed to be not present";
+                throw new AssertionError(default_message + " " + error_message);
+            }
+        }
+
+        public String waitForElementandGetAttribute (String locator, String attribute, String error_message,
+        long timeoutInSeconds){
+            WebElement element = waitForElementPresent(locator, error_message, timeoutInSeconds);
+            return element.getAttribute(attribute);
+        }
+
+        public void assertElementPresent (String locator, String attribute, String error_message,long timeoutInSeconds){
+            By by = this.getLocatorByString(locator);
+            WebElement element = driver.findElement(by);
+            Assert.assertTrue(element.getAttribute(attribute) != null);
+        }
+
+        private By getLocatorByString (String locator_with_type){
+            String[] exploded_locator = locator_with_type.split(Pattern.quote(":"), 2);
+            String by_type = exploded_locator[0];
+            String locator = exploded_locator[1];
+
+            if (by_type.equals("xpath")) {
+                return By.xpath(locator);
+            } else if (by_type.equals("id")) {
+                return By.id(locator);
+            } else {
+                throw new IllegalArgumentException("Cannot get type of locator. Locator:" + locator_with_type);
+            }
+        }
+
+    }

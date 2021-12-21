@@ -8,11 +8,11 @@ public class WelcomePageObject extends MainPageObject {
     private static final String
             STEP_LEARN_MORE_LINK = "xpath://*[@name='Learn more about Wikipedia']",
             STEP_NEW_WAYS_TO_EXPLORE = "id:New ways to explore",
-            STEP_FOR_ADD_OR_EDIT_PREFERRED_LANGUAGE= "xpath://*[@name='Add or edit preferred languages']",
+            STEP_FOR_ADD_OR_EDIT_PREFERRED_LANGUAGE = "xpath://*[@name='Add or edit preferred languages']",
             STEP_FOR_LEARNED_MORE_ABOUT_DATA_COLLECTED = "xpath://*[@name='Learn more about data collected']",
-            NEXT_LINK="xpath://*[@name='Next']",
-            GET_STARTED_BUTTON = "xpath://*[@name='Get started']";
-
+            NEXT_LINK = "xpath://*[@name='Next']",
+            GET_STARTED_BUTTON = "xpath://*[@name='Get started']",
+            SKIP = "xpath://XCUIElementTypeStaticText[@name='Skip']";
 
 
     public WelcomePageObject(AppiumDriver driver) {
@@ -41,6 +41,10 @@ public class WelcomePageObject extends MainPageObject {
 
     public void clickGetStartedButton() {
         this.waitForElementAndClick(GET_STARTED_BUTTON, "Cannot find 'Get started' button", 10);
+    }
+
+    public void clickSkip() {
+        this.waitForElementAndClick(SKIP, "Cannot find and skip button", 10);
     }
 
 }
