@@ -17,7 +17,8 @@ abstract public class ArticlePageObject extends MainPageObject {
             MY_USED_LIST_NAME,
             MY_LIST_OK_BUTTON,
             CLOSE_ARTICLE_BUTTON,
-            CHANGE_LANGUAGE;
+            CHANGE_LANGUAGE,
+            CLOSE_POP_UP_BUTTON;
 
     public ArticlePageObject(AppiumDriver driver) {
         super(driver);
@@ -87,12 +88,17 @@ abstract public class ArticlePageObject extends MainPageObject {
             this.waitForElementAndClick(CLOSE_ARTICLE_BUTTON,
                     "Cannot close article by X",
                     5);
+        }
+
+        public void closeArticlePopUp(){
+        this.waitForElementAndClick(CLOSE_POP_UP_BUTTON, "Cannot find popup", 10);
+        }
    /* }
     public String assertElementPresent() {
         WebElement title_element = driver.findElement(TITLE);
         return title_element.getAttribute("text");
     }*/
-        }
+
 
         public void addArticleToMySaved(){
            this.waitForElementAndClick(OPTION_ADD_TO_MY_LIST_BUTTON, "Cannot find option to add article to reading list", 10);

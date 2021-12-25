@@ -8,6 +8,7 @@ import org.openqa.selenium.WebElement;
 abstract public class MyListsPageObject extends MainPageObject {
     protected static String
         FOLDER_BY_NAME_TPL,
+    SAVED_ARTICLE_SCREEN,
         ARTICLE_BY_TITLE_TPL;
     private static String getFolderXpathByName(String name_of_folder){
         return FOLDER_BY_NAME_TPL.replace("{FOLDER_NAME}", name_of_folder);
@@ -29,7 +30,7 @@ abstract public class MyListsPageObject extends MainPageObject {
         String article_xpath = getSavedArticleXpathTitle(article_title);
         this.waitForElementPresent(article_xpath,
                 "Saved article is still not present with title "+ article_title,
-                5);
+                10);
     }
     public void waitForArticleDissapearByTitle(String article_title){
         String article_xpath = getSavedArticleXpathTitle(article_title);
@@ -45,6 +46,10 @@ abstract public class MyListsPageObject extends MainPageObject {
             this.clickElementToTheRightUpperCorner(article_xpath, "Cannot find saved article");
         }
         this.waitForArticleDissapearByTitle(article_title);
+    }
+
+    public void waitForSavedArticlesScreen(){
+        this.waitForElementPresent(SAVED_ARTICLE_SCREEN, "Can not open saved article screen",10);
     }
 
 

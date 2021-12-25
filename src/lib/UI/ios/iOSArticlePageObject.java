@@ -9,6 +9,7 @@ public class iOSArticlePageObject extends ArticlePageObject {
         FOOTER_ELEMENT = "id:View article in browser";
         OPTION_ADD_TO_MY_LIST_BUTTON = "xpath://XCUIElementTypeButton[@name='Save for later']";
         CLOSE_ARTICLE_BUTTON = "id:Back";
+        CLOSE_POP_UP_BUTTON = "id:places auth close";
 
     }
 
