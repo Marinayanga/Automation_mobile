@@ -18,7 +18,7 @@ public class ArticleTests extends CoreTestCase {
         SearchPageObject.clickByArticleWithSubstring("Object-oriented programming language");
 
         ArticlePageObject ArticlePageObject = ArticlePageObjectFactory.get(driver);
-        //ArticlePageObject.waitForTitleElement();
+        ArticlePageObject.waitForTitleElement();
         String article_title = ArticlePageObject.getArticleTitle();
         assertEquals(
                 "We see unexpected title",

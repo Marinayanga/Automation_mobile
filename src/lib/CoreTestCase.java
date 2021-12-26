@@ -27,6 +27,7 @@ public class CoreTestCase extends TestCase {
     protected void tearDown() throws Exception {
         driver.quit();
         super.tearDown();
+        this.rotateScreenPortrait();
     }
 
     protected void rotateScreenPortrait() {

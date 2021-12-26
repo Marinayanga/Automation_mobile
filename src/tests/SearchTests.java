@@ -3,12 +3,10 @@ package tests;
 import lib.CoreTestCase;
 
 import lib.UI.ArticlePageObject;
-import lib.UI.MainPageObject;
 import lib.UI.SearchPageObject;
 import lib.UI.factories.ArticlePageObjectFactory;
 import lib.UI.factories.SearchPageObjectFactory;
 import org.junit.Test;
-import org.openqa.selenium.By;
 
 
 public class SearchTests extends CoreTestCase {
@@ -28,12 +26,13 @@ public class SearchTests extends CoreTestCase {
         SearchPageObject SearchPageObject = SearchPageObjectFactory.get(driver);
 
         SearchPageObject.initSearchInput();
+
         SearchPageObject.waitForCancelButtonToAppear();
         SearchPageObject.clickCancelSearch();
         SearchPageObject.waitForCancelButtonToDisappear();
     }
 
-
+//не рефакторили
     @Test
     public void testCompareSearchTitle() {
         SearchPageObject SearchPageObject = SearchPageObjectFactory.get(driver);
@@ -42,6 +41,7 @@ public class SearchTests extends CoreTestCase {
 
     }
 
+    //не рефакторили
     @Test
     public void testSearchFewArticles() {
 
@@ -66,7 +66,6 @@ public class SearchTests extends CoreTestCase {
                 amount_of_search_result > 0);
     }
 
-
     @Test
     public void testAmountOfEmptySearch() {
 
@@ -79,7 +78,7 @@ public class SearchTests extends CoreTestCase {
 
 
     }
-
+//не рефакторили
 
    @Test
     public void testForTitle() {

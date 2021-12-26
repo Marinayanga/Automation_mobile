@@ -7,7 +7,6 @@ import lib.UI.factories.MyListsPageObjectFactory;
 import lib.UI.factories.NavigationUIFactory;
 import lib.UI.factories.SearchPageObjectFactory;
 import org.junit.Test;
-import org.openqa.selenium.By;
 
 public class MyListsTests extends CoreTestCase {
 
@@ -48,7 +47,7 @@ public class MyListsTests extends CoreTestCase {
 
 
     }
-
+//не отрефакторенный
     @Test
     public void testSaveTwoArticlesinOneFolder() {
         SearchPageObject SearchPageObject = SearchPageObjectFactory.get(driver);
