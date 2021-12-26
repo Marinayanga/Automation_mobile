@@ -34,10 +34,8 @@ public class MyListsTests extends CoreTestCase {
         ArticlePageObject.closeArticlePopUp();
         ArticlePageObject.closeArticle();
 
-
         NavigationUI NavigationUI = NavigationUIFactory.get(driver);
         NavigationUI.clickMyLists();
-
 
         MyListsPageObject MyListsPageObject = MyListsPageObjectFactory.get(driver);
 
