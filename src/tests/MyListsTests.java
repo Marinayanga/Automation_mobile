@@ -41,9 +41,8 @@ public class MyListsTests extends CoreTestCase {
         if (Platform.getInstance().isAndroid()) {
             MyListsPageObject.openFolderByName(name_of_folder);
         }
-        //MyListsPageObject.waitForSavedArticlesScreen();
         MyListsPageObject.swipeByArticleToDelete(article_title);
-        MyListsPageObject.waitForArticleDissapearByTitle(article_title);
+
 
 
     }
@@ -60,20 +59,18 @@ public class MyListsTests extends CoreTestCase {
         ArticlePageObject.waitForTitleElement();
         String article_title = ArticlePageObject.getArticleTitle();
         String name_of_folder = "Test folder";
-        ArticlePageObject.addArticleToMyList(name_of_folder);
 
         if (Platform.getInstance().isAndroid()) {
             ArticlePageObject.addArticleToMyList(name_of_folder);
         } else {
             ArticlePageObject.addArticleToMySaved();
         }
-
         ArticlePageObject.closeArticlePopUp();
         ArticlePageObject.closeArticle();
 
+//доьавляем вторую статью
         SearchPageObject.initSearchInput();
         SearchPageObject.clearSearchLine();
-
         SearchPageObject.typeSearchLine("Linkin Park");
         SearchPageObject.clickByArticleWithSubstring("American rock band");
         ArticlePageObject.waitForTitleElement();
@@ -86,10 +83,7 @@ public class MyListsTests extends CoreTestCase {
 
         ArticlePageObject.closeArticle();
 
-
-
         MyListsPageObject MyListsPageObject = MyListsPageObjectFactory.get(driver);
-
 
         NavigationUI NavigationUI = NavigationUIFactory.get(driver);
         NavigationUI.clickMyLists();
@@ -98,9 +92,6 @@ public class MyListsTests extends CoreTestCase {
             MyListsPageObject.openFolderByName(name_of_folder);
         }
         MyListsPageObject.swipeByArticleToDelete(article_title);
-        MyListsPageObject.waitForArticleDissapearByTitle(article_title);
-
-
         assertEquals("Wrong article was deleted", "Linkin Park", second_article_title);
 
 

@@ -9,9 +9,6 @@ import java.time.Duration;
 
 public class CoreTestCase extends TestCase {
 
-    private static final String PLATFORM_IOS = "ios";
-    private static final String PLATFORM_ANDROID = "android";
-
     protected AppiumDriver driver;
     protected Platform Platform;
 
@@ -27,7 +24,7 @@ public class CoreTestCase extends TestCase {
     protected void tearDown() throws Exception {
         driver.quit();
         super.tearDown();
-        this.rotateScreenPortrait();
+
     }
 
     protected void rotateScreenPortrait() {

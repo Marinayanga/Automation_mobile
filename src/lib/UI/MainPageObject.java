@@ -47,7 +47,6 @@ public class MainPageObject {
 
     }
 
-
     public boolean waitForElementNotPresent(String locator, String error_message, long timeoutInSeconds) {
 
         By by = this.getLocatorByString(locator);
