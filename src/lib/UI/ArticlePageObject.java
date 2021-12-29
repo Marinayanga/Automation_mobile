@@ -2,11 +2,14 @@ package lib.UI;
 
 import io.appium.java_client.AppiumDriver;
 import lib.Platform;
+import org.junit.Assert;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
 abstract public class ArticlePageObject extends MainPageObject {
     protected static String
             TITLE,
+            TITLE_2,
             FOOTER_ELEMENT,
             OPTIONS_BUTTON,
             OPTION_ADD_TO_MY_LIST_BUTTON,
@@ -22,13 +25,12 @@ abstract public class ArticlePageObject extends MainPageObject {
         super(driver);
     }
 
-    private static String getArticleXpathTitle(String article_title){
-        return TITLE.replace("{NAME_OF_TITLE}", article_title);//вот тут хочу заменять название статьи на пользовательское
+    public WebElement waitForTitleElement() {
+        return this.waitForElementPresent(TITLE, "Cannot find article title on page", 15);
     }
 
-    public WebElement waitForTitleElement() { // вот тут наверное нужно сделать какой-то метод, который будет чекать по локатору выше будет проверять появление тайтла, но что передавать в параметры?
-        WebElement title_element = getArticleXpathTitle();
-        return this.waitForElementPresent(TITLE, "Cannot find article title on page", 15);
+    public WebElement waitForTitleElement2() {
+        return this.waitForElementPresent(TITLE_2, "Cannot find article title on page", 15);
     }
 
     public String getArticleTitle() {
@@ -39,6 +41,15 @@ abstract public class ArticlePageObject extends MainPageObject {
            return title_element.getAttribute("name");
         }
     }
+    public String getArticleTitle2() {
+        WebElement title_element = waitForTitleElement2();
+        if (Platform.getInstance().isAndroid()) {
+            return title_element.getAttribute("text");
+        } else {
+            return title_element.getAttribute("name");
+        }
+    }
+
         public void swipeToFooter() {
         if(Platform.getInstance().isAndroid()) {
             this.swipeUpToFindElement(FOOTER_ELEMENT,

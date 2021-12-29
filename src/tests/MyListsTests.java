@@ -73,8 +73,8 @@ public class MyListsTests extends CoreTestCase {
         SearchPageObject.clearSearchLine();
         SearchPageObject.typeSearchLine("Linkin Park");
         SearchPageObject.clickByArticleWithSubstring("American rock band");
-        ArticlePageObject.waitForTitleElement();
-        String second_article_title = ArticlePageObject.getArticleTitle();
+        ArticlePageObject.waitForTitleElement2();
+        String second_article_title = ArticlePageObject.getArticleTitle2();
         if (Platform.getInstance().isAndroid()) {
             ArticlePageObject.addArticleToUsedList();
         } else {
